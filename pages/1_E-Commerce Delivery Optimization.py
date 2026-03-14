@@ -86,15 +86,12 @@ st.latex(r"Minimize \; Z = \sum c_{ij} x_{ij}")
 st.subheader("Constraints")
 
 st.write("1️⃣ Supply Constraint (Warehouse capacity)")
-
 st.latex(r"\sum x_{Wj} \leq Supply")
 
 st.write("2️⃣ Demand Constraint (Hub requirement)")
-
 st.latex(r"\sum x_{ij} = d_j")
 
 st.write("3️⃣ Non-Negativity Constraint")
-
 st.latex(r"x_{ij} \geq 0")
 
 # ------------------------------------------------
@@ -110,7 +107,7 @@ This algorithm is widely used in:
 
 • Logistics systems  
 • GPS navigation  
-• Google Maps routing systems
+• Route optimization systems
 """)
 
 st.write("Shortest path formula:")
@@ -148,10 +145,6 @@ st.table({
 
 st.header("5. Model Structure")
 
-st.write("""
-Example Network Structure
-""")
-
 st.code("""
            (Hub A)
               ^
@@ -177,28 +170,51 @@ Edges = {(W,A), (W,B), (W,C), (A,B), (B,C)}
 st.header("6. Code Implementation")
 
 st.write("""
-The model is implemented using Python libraries:
-
-• **networkx** → Graph modelling  
-• **matplotlib** → Graph visualization  
-• **pandas** → Result analysis tables
+The following Python program models the logistics network using **NetworkX**
+and computes the shortest delivery routes.
 """)
 
 st.code("""
 import networkx as nx
 import matplotlib.pyplot as plt
 
+# Create graph
 G = nx.Graph()
 
+# Define edges with weights (distance or cost)
 edges = [
-('Warehouse','Hub1',4),
-('Warehouse','Hub2',6),
-('Warehouse','Hub3',8),
-('Hub1','Hub2',2),
-('Hub2','Hub3',3)
+    ('Warehouse','Hub1',4),
+    ('Warehouse','Hub2',6),
+    ('Warehouse','Hub3',8),
+    ('Hub1','Hub2',2),
+    ('Hub2','Hub3',3)
 ]
 
+# Add edges to graph
 G.add_weighted_edges_from(edges)
+
+# Compute shortest paths
+print("Shortest Path to Hub1:",
+      nx.shortest_path(G,'Warehouse','Hub1',weight='weight'))
+
+print("Shortest Path to Hub2:",
+      nx.shortest_path(G,'Warehouse','Hub2',weight='weight'))
+
+print("Shortest Path to Hub3:",
+      nx.shortest_path(G,'Warehouse','Hub3',weight='weight'))
+
+# Draw graph
+pos = nx.spring_layout(G)
+
+nx.draw(G, pos, with_labels=True, node_color='lightblue')
+
+# Show edge weights
+labels = nx.get_edge_attributes(G,'weight')
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+
+plt.title("E-commerce Delivery Network")
+
+plt.show()
 """, language="python")
 
 # ------------------------------------------------
@@ -234,7 +250,7 @@ Total transportation cost is minimized.
 st.header("8. Test Scenario 2")
 
 st.write("""
-If edge weight changes:
+If the transportation cost changes:
 
 Warehouse → Hub3 = 15
 """)
@@ -244,7 +260,7 @@ The shortest route becomes:
 
 Warehouse → Hub2 → Hub3
 
-This shows the routing algorithm automatically adapts to network changes.
+This demonstrates that the routing algorithm automatically adapts to network changes.
 """)
 
 # ------------------------------------------------
@@ -258,14 +274,14 @@ st.subheader("Graph Interpretation")
 st.write("""
 • Nodes represent logistics centers  
 • Edges represent transportation routes  
-• Edge weights represent cost or time  
+• Edge weights represent cost or travel time  
 • Shorter paths reduce delivery time
 """)
 
 st.subheader("Observations")
 
 st.write("""
-1. If direct route cost is high, the algorithm chooses an alternate path.
+1. If a direct route has high cost, the algorithm selects an alternate path.
 
 2. The **Flow Model** ensures demand satisfaction.
 
