@@ -43,9 +43,6 @@ Use the sidebar to navigate through the project:
 
 st.markdown("---")
 
-=======
-import streamlit as st
-
 st.set_page_config(
     page_title="E-Commerce Delivery Optimization",
     page_icon="🚚",
@@ -89,5 +86,4 @@ Use the sidebar to navigate through the project:
 
 st.markdown("---")
 
->>>>>>> f7de24392b8b78218f792c9ab856fc4d20073f81
 st.info("Use the **sidebar** to open the different pages of the project.")
