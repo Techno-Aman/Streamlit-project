@@ -23,13 +23,13 @@ st.markdown("### Project Pages")
 st.write("""
 Use the sidebar to navigate through the project:
 
-📘 **Project Explanation**  
+📘 **E-commerce Delivery Optimization**  
 - Problem definition  
 - Mathematical model  
 - Flow optimization approach  
 - Routing strategies
 
-🚚 **Delivery Optimizer**  
+🚚 **Delivery Optimizer Module**  
 - Interactive logistics network builder  
 - Add or remove hubs  
 - Create delivery routes  
