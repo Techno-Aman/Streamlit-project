@@ -7,7 +7,7 @@ st.markdown("""
 
 /* Main app background */
 .stApp{
-    background-color: #000370;
+    background-color: #000033;
 }
 
 /* Text color */
