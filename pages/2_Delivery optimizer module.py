@@ -154,6 +154,27 @@ if st.sidebar.button("Remove Location"):
     else:
         st.error("Warehouse cannot be removed.")
 
+# Remove Route
+st.sidebar.header("Remove Delivery Route")
+
+if st.session_state.edges:
+
+    edge_options = [
+        f"{edge[0]} → {edge[1]} (Distance {edge[2]})"
+        for edge in st.session_state.edges
+    ]
+
+    selected_edge = st.sidebar.selectbox("Select Route to Remove", edge_options)
+
+    if st.sidebar.button("Remove Route"):
+
+        index = edge_options.index(selected_edge)
+        removed_edge = st.session_state.edges.pop(index)
+
+        st.success(f"Removed route: {removed_edge[0]} → {removed_edge[1]}")
+
+else:
+    st.sidebar.info("No routes available to remove.")
 # ---------------------------
 # Add Route
 # ---------------------------
